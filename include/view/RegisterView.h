@@ -5,9 +5,23 @@
 #ifndef PEERTOPAY_REGISTERVIEW_H
 #define PEERTOPAY_REGISTERVIEW_H
 
+#include "wx/wx.h"
 
-class RegisterView {
+class RegisterView: public wxFrame {
+public:
+    explicit RegisterView(const wxString& title);
+    wxButton* getLoginButton();
+    wxButton* getRegisterButton();
 
+private:
+   // void OnRegister(wxCommandEvent& event);
+
+    wxTextCtrl* nameField;
+    wxTextCtrl* surnameField;
+    wxTextCtrl* emailField;
+    wxTextCtrl* passwordField;
+    wxButton* loginButton;
+    wxButton* registerButton;
 };
 
 

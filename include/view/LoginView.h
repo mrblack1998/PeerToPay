@@ -8,14 +8,21 @@
 #include <wx/wx.h>
 class LoginView: public wxFrame{
     public:
-        LoginView(const wxString& title);
+        explicit LoginView(const wxString& title);
+        wxTextCtrl* getEmailField();
+        wxTextCtrl* getPasswordField();
+        wxCheckBox* getRememberMe();
+        wxButton* getLoginButton();
+        wxButton* getRegisterButton();
 
     private:
         void OnLogin(wxCommandEvent& event);
-        void OnRegister(wxCommandEvent& event);
 
         wxTextCtrl* emailField;
         wxTextCtrl* passwordField;
+        wxCheckBox* rememberMe;
+        wxButton* loginButton;
+        wxButton* registerButton;
 };
 
 

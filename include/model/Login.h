@@ -8,6 +8,7 @@
 #include "string"
 #include "fstream"
 #include "DatabaseManager.h"
+#include "PswCipher.h"
 
 class Login{
     public:

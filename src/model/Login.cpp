@@ -11,7 +11,7 @@
 
     bool Login::tryLogin(const std::string& email, const std::string& password, bool rememberMe) {
         MYSQL conn = DatabaseManager::getConnection();
-        std::string query = "SELECT * FROM user WHERE email = '" + email + "' AND psw = '" + password + "'";
+        std::string query = "SELECT * FROM user WHERE email = '" + email + "' AND psw = '" + PswCipher::encrypt(password) + "'";
         if (mysql_query(&conn, query.c_str()) != 0) {
             throw std::runtime_error("Errore durante l'esecuzione della query: " + std::string(mysql_error(&conn)));
         }

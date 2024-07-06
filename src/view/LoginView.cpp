@@ -4,32 +4,42 @@
 
 #include "include/view/LoginView.h"
 
-LoginView::LoginView(const wxString& title): wxFrame(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(500, 500)){
+LoginView::LoginView(const wxString& title): wxFrame(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(500, 400)){
     auto* panel = new wxPanel(this, wxID_ANY);
 
     auto* vbox = new wxBoxSizer(wxVERTICAL);
 
     //Titolo del progetto in alto
-    auto* titleText = new wxStaticText(panel, wxID_ANY, wxT("Peer to Pay"));
-    titleText->SetFont(wxFont(30, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
-    vbox->Add(titleText, 0, wxALIGN_CENTER | wxTOP, 10);
+    auto* p2p = new wxStaticText(panel, wxID_ANY, wxT("Peer to Pay"));
+    p2p->SetFont(wxFont(30, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+    vbox->Add(p2p, 0, wxALIGN_CENTER | wxTOP, 10);
 
     //spazio tra titolo e campi di testo
     vbox->Add(-1, 20);
 
-    //Email
+    //prima linea
+    auto* hbox = new wxBoxSizer(wxHORIZONTAL);
+
+    //label email
     auto* emailLabel = new wxStaticText(panel, wxID_ANY, wxT("Email"));
-    vbox->Add(emailLabel, 0, wxALIGN_CENTER | wxALL, 10);
+    hbox->Add(emailLabel, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
+    emailField = new wxTextCtrl(panel, wxID_ANY, "", wxDefaultPosition, wxSize(500, 25));
+    hbox->Add(emailField, 0, wxFIXED_MINSIZE, 98);
 
-    emailField = new wxTextCtrl(panel, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(400, 20));
-    vbox->Add(emailField, 0, wxALIGN_CENTER | wxALL, 10);
+    //aggiungo la prima linea al vbox
+    vbox->Insert(2, hbox, 0, wxEXPAND | wxALL, 10);
 
-    //Password
-    auto* passwordLabel = new wxStaticText(panel, wxID_ANY, wxT("Password"));
-    vbox->Add(passwordLabel, 0, wxALIGN_CENTER | wxALL, 10);
+    //seconda linea
+    hbox = new wxBoxSizer(wxHORIZONTAL);
 
-    passwordField = new wxTextCtrl(panel, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(400, 20), wxTE_PASSWORD);
-    vbox->Add(passwordField, 0, wxALIGN_CENTER | wxALL, 10);
+    //label password
+    auto* passwordLabel = new wxStaticText(panel, wxID_ANY, wxT("Pswd"));
+    hbox->Add(passwordLabel, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
+    passwordField = new wxTextCtrl(panel, wxID_ANY, "", wxDefaultPosition, wxSize(500, 25), wxTE_PASSWORD);
+    hbox->Add(passwordField, 0, wxFIXED_MINSIZE, 98);
+
+    //aggiungo la seconda linea al vbox
+    vbox->Insert(3, hbox, 0, wxEXPAND | wxALL, 10);
 
     //Ricordami checkbox
     rememberMe = new wxCheckBox(panel, wxID_ANY, wxT("Ricordami al prossimo accesso"));

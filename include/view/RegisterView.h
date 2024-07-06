@@ -12,6 +12,10 @@ public:
     explicit RegisterView(const wxString& title);
     wxButton* getLoginButton();
     wxButton* getRegisterButton();
+    wxTextCtrl* getFirstNameField();
+    wxTextCtrl* getLastNameField();
+    wxTextCtrl* getEmailField();
+    wxTextCtrl* getPasswordField();
 
 private:
    // void OnRegister(wxCommandEvent& event);

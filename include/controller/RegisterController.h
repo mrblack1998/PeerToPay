@@ -16,6 +16,8 @@ public:
     void OnRegister(wxCommandEvent& event);
 
 private:
+    void OnClose(wxCloseEvent& event);
+
     RegisterView* view;
     Register* model;
 };

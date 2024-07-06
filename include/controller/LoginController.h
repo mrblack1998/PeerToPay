@@ -18,6 +18,7 @@ class LoginController{
         void OnLogin(wxCommandEvent& event);
 
     private:
+        void OnClose(wxCloseEvent& event);
         Login* model;
         LoginView* view;
 };

@@ -10,6 +10,7 @@ LoginController::LoginController(LoginView* view, Login* model) {
     this->model = model;
     this->view->Bind(wxEVT_BUTTON, &LoginController::OnLogin, this, view->getLoginButton()->GetId());
     this->view->Bind(wxEVT_BUTTON, &LoginController::SwitchToRegister, this, view->getRegisterButton()->GetId());
+    this->view->Bind(wxEVT_CLOSE_WINDOW, &LoginController::OnClose, this);
 }
 
 void LoginController::Init() {
@@ -40,3 +41,8 @@ void LoginController::OnLogin(wxCommandEvent& event) {
     }
 }
 
+void LoginController::OnClose(wxCloseEvent &event) {
+    this->view->Show(false);
+    this->view->Destroy();
+    exit(0);
+}

@@ -7,6 +7,8 @@
 
 #include <include/model/Login.h>
 #include <include/view/LoginView.h>
+#include "include/controller/RegisterController.h"
+#include "include/controller/UserController.h"
 
 class LoginController{
     public:

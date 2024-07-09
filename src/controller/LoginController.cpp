@@ -1,9 +1,7 @@
 //
 // Created by Edoardo Nero on 04/07/24.
 //
-
 #include "include/controller/LoginController.h"
-#include "include/controller/RegisterController.h"
 
 LoginController::LoginController(LoginView* view, Login* model) {
     this->view = view;
@@ -35,7 +33,9 @@ void LoginController::SwitchToRegister(wxCommandEvent& event) {
 
 void LoginController::OnLogin(wxCommandEvent& event) {
     if(model->tryLogin(this->view->getEmailField()->GetValue().ToStdString(), this->view->getPasswordField()->GetValue().ToStdString(), this->view->getRememberMe()->IsChecked())){
-        wxMessageBox("Login effettuato con successo", "Successo", wxICON_INFORMATION);
+        this->view->Show(false);
+        auto* userController = new UserController(new UserView("Peer to Pay - Dashboard"), new User(this->view->getEmailField()->GetValue().ToStdString(),this->view->getPasswordField()->GetValue().ToStdString()));
+        userController->init();
     }else{
         wxMessageBox("Credenziali errate", "Errore", wxICON_ERROR);
     }

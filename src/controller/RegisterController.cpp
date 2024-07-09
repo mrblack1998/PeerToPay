@@ -17,7 +17,7 @@ void RegisterController::init() {
 void RegisterController::switchToLogin(wxCommandEvent& event) {
     view->Show(false);
     auto* loginController = new LoginController(new LoginView("Peer to Pay - Login"),new Login());
-    loginController->Init();
+    loginController->init();
 }
 
 void RegisterController::onClose(wxCloseEvent &event) {

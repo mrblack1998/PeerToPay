@@ -11,7 +11,7 @@ LoginController::LoginController(LoginView* view, Login* model) {
     this->view->Bind(wxEVT_CLOSE_WINDOW, &LoginController::OnClose, this);
 }
 
-void LoginController::Init() {
+void LoginController::init() {
     this->model->retrieveCredenziali();
     if(this->model->getRememberMe()){
         this->view->getEmailField()->SetValue(this->model->getEmail());

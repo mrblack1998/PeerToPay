@@ -4,7 +4,7 @@
 
 #include "include/view/LoginView.h"
 
-LoginView::LoginView(const wxString& title): wxFrame(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(500, 400)){
+LoginView::LoginView(const wxString& title): wxFrame(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(500, 400), wxST_NO_AUTORESIZE | wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)){
     auto* panel = new wxPanel(this, wxID_ANY);
 
     auto* vbox = new wxBoxSizer(wxVERTICAL);
@@ -64,6 +64,8 @@ LoginView::LoginView(const wxString& title): wxFrame(nullptr, wxID_ANY, title, w
     vbox->Add(githubLink, 0, wxALIGN_CENTER | wxTOP, 10);
 
     panel->SetSizer(vbox);
+
+    Centre();
 }
 
 wxTextCtrl* LoginView::getEmailField() {

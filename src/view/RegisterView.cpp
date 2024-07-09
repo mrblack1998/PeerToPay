@@ -73,6 +73,8 @@ RegisterView::RegisterView(const wxString& title) : wxFrame(nullptr, wxID_ANY, t
     vbox->Add(loginButton, 0, wxALIGN_CENTER | wxALL, 5);
 
     panel->SetSizer(vbox);
+
+    Centre();
 }
 
 wxTextCtrl* RegisterView::getFirstNameField() {

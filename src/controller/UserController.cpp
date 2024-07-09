@@ -42,21 +42,22 @@ void UserController::switchPanel(wxCommandEvent &event) {
             break;
         case ID_RECEIVE:
             newPanel = (new ReceivePanelView(new wxPanel(view)))->getPanel();
-            std::cout << "Receive" << std::endl;
             break;
         case ID_ACCOUNT:
             newPanel = (new BankAccountPanelView(new wxPanel(view)))->getPanel();
-            std::cout << "Account" << std::endl;
             break;
         case ID_LOGOUT:
-            std::cout << "Logout" << std::endl;
-            // Gestisci il logout qui
+            newPanel = nullptr;
             break;
         default:
             return; // Nessuna azione se l'ID non corrisponde
     }
     if (newPanel != nullptr) {
         view->setPanelToUse(newPanel);
+    }else{
+        view->Show(false);
+        auto* loginController = new LoginController(new LoginView("Peer to Pay - Login"),new Login());
+        loginController->init();
     }
 }
 

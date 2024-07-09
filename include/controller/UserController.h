@@ -11,6 +11,7 @@
 #include "include/view/SendPanelView.h"
 #include "include/view/ReceivePanelView.h"
 #include "include/view/BankAccountPanelView.h"
+#include "include/controller/LoginController.h"
 
 class UserController {
 public:

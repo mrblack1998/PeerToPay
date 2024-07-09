@@ -12,7 +12,7 @@ enum MenuIDs {
     ID_LOGOUT = 104
 };
 
-UserView::UserView(const wxString& title): wxFrame(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600)){
+UserView::UserView(const wxString& title): wxFrame(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(500, 400), wxST_NO_AUTORESIZE | wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)){
     //Menu bar con i seguenti elementi: Home, Invia, Ricevi, Conto e Logout
     menuBar = new wxMenuBar();
     home = new wxMenu();

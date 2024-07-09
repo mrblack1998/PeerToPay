@@ -18,7 +18,7 @@ wxIMPLEMENT_APP(MyApp);
 bool MyApp::OnInit()
 {
     auto* loginController = new LoginController(new LoginView("Peer to Pay - Login"),new Login());
-    loginController->Init();
+    loginController->init();
 
     return true;
 }

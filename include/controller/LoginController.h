@@ -14,7 +14,7 @@ class LoginController{
     public:
         explicit LoginController(LoginView* view, Login* model);
         ~LoginController();
-        void Init();
+        void init();
         void SwitchToRegister(wxCommandEvent& event);
         void StartProgram();
         void OnLogin(wxCommandEvent& event);

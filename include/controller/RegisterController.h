@@ -7,16 +7,17 @@
 
 #include "include/model/Register.h"
 #include "include/view/RegisterView.h"
+#include "include/controller/LoginController.h"
 
 class RegisterController {
 public:
     RegisterController(RegisterView* view, Register* model);
-    void Init();
-    void SwitchToLogin(wxCommandEvent& event);
-    void OnRegister(wxCommandEvent& event);
+    void init();
+    void switchToLogin(wxCommandEvent& event);
+    void onRegister(wxCommandEvent& event);
 
 private:
-    void OnClose(wxCloseEvent& event);
+    void onClose(wxCloseEvent& event);
 
     RegisterView* view;
     Register* model;

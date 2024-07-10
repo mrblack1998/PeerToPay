@@ -32,13 +32,18 @@ void LoginController::SwitchToRegister(wxCommandEvent& event) {
 }
 
 void LoginController::OnLogin(wxCommandEvent& event) {
-    if(model->tryLogin(this->view->getEmailField()->GetValue().ToStdString(), this->view->getPasswordField()->GetValue().ToStdString(), this->view->getRememberMe()->IsChecked())){
-        this->view->Show(false);
-        auto* userController = new UserController(new UserView("Peer to Pay - Dashboard"), new User(this->view->getEmailField()->GetValue().ToStdString(),this->view->getPasswordField()->GetValue().ToStdString()));
-        userController->init();
-    }else{
-        wxMessageBox("Credenziali errate", "Errore", wxICON_ERROR);
+    try{
+        if(model->tryLogin(this->view->getEmailField()->GetValue().ToStdString(), this->view->getPasswordField()->GetValue().ToStdString(), this->view->getRememberMe()->IsChecked())){
+            this->view->Show(false);
+            auto* userController = new UserController(new UserView("Peer to Pay - Dashboard"), new User(this->view->getEmailField()->GetValue().ToStdString(),this->view->getPasswordField()->GetValue().ToStdString()));
+            userController->init();
+        }else{
+            wxMessageBox("Credenziali errate", "Errore", wxICON_ERROR);
+        }
+    }catch(std::exception &e){
+        wxMessageBox(e.what(), "Errore", wxICON_ERROR);
     }
+
 }
 
 void LoginController::OnClose(wxCloseEvent &event) {

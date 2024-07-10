@@ -9,9 +9,13 @@
 
 class BankAccountPanelView {
 public:
-    BankAccountPanelView(wxPanel *panel);
+    explicit BankAccountPanelView(wxPanel *panel, const std::vector<std::string>& parametri);
     ~BankAccountPanelView();
     wxPanel* getPanel();
+    std::string getAccountNumber();
+    std::string getExpirationDate();
+    std::string getCvv();
+    std::string getBalance();
 
 private:
     wxPanel* panel;

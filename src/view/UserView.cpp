@@ -47,15 +47,27 @@ void UserView::init() {
     menuBar->Append(logout, wxT("Logout"));
     SetMenuBar(menuBar);
     Centre();
-    setPanelToUse((new HomePanelView(new wxPanel(this, wxID_ANY)))->getPanel());
+    //crea HomePanelView
+    auto* homePanel = new HomePanelView(new wxPanel(this, wxID_ANY));
+    setPanelToUse(homePanel->getPanel(), homePanel);
+    //setPanelToUse((new HomePanelView(new wxPanel(this, wxID_ANY)))->getPanel());
 }
 
-void UserView::setPanelToUse(wxPanel* panelToUse) {
+void UserView::setPanelToUse(wxPanel* panelToUse, const std::any& creator) {
     if (panel != nullptr) {
         panel->Show(false);
         panel->Destroy();
     }
     panel = panelToUse;
+    creatorObject = creator;
     panel->Show(true);
     panel->Layout();
+}
+
+wxPanel* UserView::getPanel() {
+    return panel;
+}
+
+std::any UserView::getCreatorObject() {
+    return creatorObject;
 }

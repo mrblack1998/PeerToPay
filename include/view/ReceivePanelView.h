@@ -9,9 +9,11 @@
 
 class ReceivePanelView {
 public:
-    ReceivePanelView(wxPanel *panel);
+    ReceivePanelView(wxPanel *panel, const std::vector<std::string>& parametri);
     ~ReceivePanelView();
     wxPanel* getPanel();
+    void setCode(const std::string& code);
+    void setExpirationDate(const std::string& expirationDate);
 
 private:
     wxPanel* panel;

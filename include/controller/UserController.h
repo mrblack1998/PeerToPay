@@ -23,6 +23,7 @@ private:
     void switchPanel(wxCommandEvent& event);
     void onClose(wxCloseEvent& event);
     void saveBankAccount(wxCommandEvent& event);
+    void generateCode(wxCommandEvent& event);
 
     UserView* view;
     User* model;

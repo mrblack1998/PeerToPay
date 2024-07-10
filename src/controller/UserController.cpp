@@ -10,7 +10,8 @@ enum MenuIDs {
     ID_RECEIVE = 102,
     ID_ACCOUNT = 103,
     ID_LOGOUT = 104,
-    ID_SAVE = 105
+    ID_SAVE = 105,
+    ID_GENERATE = 106
 };
 
 UserController::UserController(UserView* view, User* model) : view(view), model(model) {
@@ -23,6 +24,8 @@ UserController::UserController(UserView* view, User* model) : view(view), model(
     view->Bind(wxEVT_MENU, &UserController::switchPanel, this, ID_LOGOUT);
     // Bind dei pulsanti della GUI BankAccountPanelView
     view->Bind(wxEVT_BUTTON, &UserController::saveBankAccount, this, ID_SAVE);
+    //Bind dei pulsanti della GUI ReceivePanelView
+    view->Bind(wxEVT_BUTTON, &UserController::generateCode, this, ID_GENERATE);
 }
 
 void UserController::init() {
@@ -48,7 +51,7 @@ void UserController::switchPanel(wxCommandEvent &event) {
         view->getPanel()->Show(false);
         view->setPanelToUse(newPanel, panelCreator);
     }else if(event.GetId() == ID_RECEIVE){
-        auto* panelCreator = new ReceivePanelView(new wxPanel(view));
+        auto* panelCreator = new ReceivePanelView(new wxPanel(view), model->getReceivePanel()->getCode(model->getId()));
         newPanel = panelCreator->getPanel();
         view->getPanel()->Show(false);
         view->setPanelToUse(newPanel, panelCreator);
@@ -88,6 +91,21 @@ void UserController::saveBankAccount(wxCommandEvent &event) {
         } else {
             wxMessageBox("Errore durante il salvataggio del conto.", "Errore", wxICON_ERROR);
         }
+    } catch (const std::invalid_argument& e) {
+        wxMessageBox(e.what(), "Errore", wxICON_ERROR);
+    } catch (const std::out_of_range& e) {
+        wxMessageBox(e.what(), "Errore", wxICON_ERROR);
+    }
+}
+
+//ReceivePanelView
+
+void UserController::generateCode(wxCommandEvent &event) {
+    auto * receivePanel = std::any_cast<ReceivePanelView*>(view->getCreatorObject());
+    try {
+        std::vector<std::string> parametri = model->getReceivePanel()->generateCode(model->getId());
+        receivePanel->setCode(parametri[0]);
+        receivePanel->setExpirationDate(parametri[1]);
     } catch (const std::invalid_argument& e) {
         wxMessageBox(e.what(), "Errore", wxICON_ERROR);
     } catch (const std::out_of_range& e) {

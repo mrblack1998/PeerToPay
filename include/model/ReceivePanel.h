@@ -5,8 +5,15 @@
 #ifndef PEERTOPAY_RECEIVEPANEL_H
 #define PEERTOPAY_RECEIVEPANEL_H
 
+#include "DatabaseManager.h"
+#include "string"
 
 class ReceivePanel {
+public:
+    ReceivePanel();
+    ~ReceivePanel();
+    static std::vector<std::string> getCode(const int &id);
+    static std::vector<std::string> generateCode(const int &id);
 
 };
 

@@ -3,7 +3,6 @@
 //
 
 #include "include/model/BankAccountPanel.h"
-#include "iostream"
 
 BankAccountPanel::BankAccountPanel() = default;
 
@@ -26,6 +25,10 @@ std::vector<std::string> BankAccountPanel::getBankAccount(const int &id) {
         bankAccount.emplace_back(row[3]);
         return bankAccount;
     } else {
+        bankAccount.emplace_back("");
+        bankAccount.emplace_back("");
+        bankAccount.emplace_back("");
+        bankAccount.emplace_back("");
         return bankAccount;
     }
 }
@@ -65,9 +68,9 @@ std::string formatBalance(const std::string& balance) {
     try {
         number = std::stod(balanceFormatted);
     } catch (const std::invalid_argument& e) {
-        throw std::invalid_argument("Balance non è un numero valido.");
+        throw std::invalid_argument("L'importo non è un numero valido.");
     } catch (const std::out_of_range& e) {
-        throw std::out_of_range("Balance è fuori dall'intervallo consentito.");
+        throw std::out_of_range("L'importo è fuori dall'intervallo consentito.");
     }
 
     std::ostringstream stream;

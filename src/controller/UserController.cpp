@@ -12,7 +12,8 @@ enum MenuIDs {
     ID_LOGOUT = 104,
     ID_SAVE = 105,
     ID_GENERATE = 106,
-    ID_TRANSFER = 107
+    ID_TRANSFER = 107,
+    ID_EXPORT = 108
 };
 
 UserController::UserController(UserView* view, User* model) : view(view), model(model) {
@@ -29,9 +30,15 @@ UserController::UserController(UserView* view, User* model) : view(view), model(
     view->Bind(wxEVT_BUTTON, &UserController::generateCode, this, ID_GENERATE);
     //Bind dei pulsanti della GUI SendPanelView
     view->Bind(wxEVT_BUTTON, &UserController::sendMoney, this, ID_TRANSFER);
+    //Bind dei pulsanti della GUI HomePanelView
+    view->Bind(wxEVT_BUTTON, &UserController::exportTransactions, this, ID_EXPORT);
 }
 
 void UserController::init() {
+    auto* panelCreator = new HomePanelView(new wxPanel(view), model->getHomePanel()->getBalance(model->getId()), model->getHomePanel()->getTransactions(model->getId()));
+    wxPanel* newPanel = panelCreator->getPanel();
+    view->getPanel()->Show(false);
+    view->setPanelToUse(newPanel, panelCreator);
     view->Show(true);
 }
 
@@ -44,7 +51,7 @@ void UserController::onClose(wxCloseEvent &event) {
 void UserController::switchPanel(wxCommandEvent &event) {
     wxPanel* newPanel = nullptr;
     if(event.GetId() == ID_HOME){
-        auto* panelCreator = new HomePanelView(new wxPanel(view));
+        auto* panelCreator = new HomePanelView(new wxPanel(view), model->getHomePanel()->getBalance(model->getId()), model->getHomePanel()->getTransactions(model->getId()));
         newPanel = panelCreator->getPanel();
         view->getPanel()->Show(false);
         view->setPanelToUse(newPanel, panelCreator);
@@ -138,4 +145,32 @@ void UserController::sendMoney(wxCommandEvent &event) {
     }catch (const std::exception& e) {
         wxMessageBox(e.what(), "Errore", wxICON_ERROR);
     }
+}
+
+//HomePanelView
+void UserController::exportTransactions(wxCommandEvent &event) {
+    auto * homePanel = std::any_cast<HomePanelView*>(view->getCreatorObject());
+    std::vector<Transazione> transactions = model->getHomePanel()->getTransactions(model->getId());
+    //crea il file txt con i movimenti (1 per riga)
+    std::ofstream file("movimenti.txt");
+    //la prima riga contiene i nomi delle colonne
+    file << "ID - Mittente - Destinatario - Importo - Tipo - Data e Orario" << std::endl;
+    for (const auto& transaction : transactions) {
+        //importo in formato 0.00
+        std::string importo = std::to_string(transaction.getImporto());
+        if(importo.find('.') != std::string::npos) {
+            importo = importo.substr(0, importo.find('.') + 3);
+        }else{
+            importo += ".00";
+        }
+        importo += " €";
+        //data in formato gg/mm/aa hh:mm
+        std::string data = transaction.getData();
+        data = data.substr(0, data.find(' '));
+        data = data.substr(8, 2) + "/" + data.substr(5, 2) + "/" + data.substr(2, 2) + " " + transaction.getData().substr(11, 5);
+        //salvo la riga nel file
+        file << transaction.getId() << " - " << transaction.getMittente() << " - " << transaction.getDestinatario() << " - " << importo << " - " << (transaction.getTipo() ? "Entrata" : "Uscita") << " - " << data << std::endl;
+    }
+    file.close();
+    wxMessageBox("Movimenti esportati con successo.", "Successo", wxICON_INFORMATION);
 }

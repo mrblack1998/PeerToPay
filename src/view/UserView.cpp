@@ -48,9 +48,8 @@ void UserView::init() {
     SetMenuBar(menuBar);
     Centre();
     //crea HomePanelView
-    auto* homePanel = new HomePanelView(new wxPanel(this, wxID_ANY));
+    auto* homePanel = new HomePanelView(new wxPanel(this, wxID_ANY), "0.00", std::vector<Transazione>());
     setPanelToUse(homePanel->getPanel(), homePanel);
-    //setPanelToUse((new HomePanelView(new wxPanel(this, wxID_ANY)))->getPanel());
 }
 
 void UserView::setPanelToUse(wxPanel* panelToUse, const std::any& creator) {

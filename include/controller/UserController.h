@@ -25,6 +25,7 @@ private:
     void saveBankAccount(wxCommandEvent& event);
     void generateCode(wxCommandEvent& event);
     void sendMoney(wxCommandEvent& event);
+    void exportTransactions(wxCommandEvent& event);
 
     UserView* view;
     User* model;

@@ -11,7 +11,8 @@ enum MenuIDs {
     ID_ACCOUNT = 103,
     ID_LOGOUT = 104,
     ID_SAVE = 105,
-    ID_GENERATE = 106
+    ID_GENERATE = 106,
+    ID_TRANSFER = 107
 };
 
 UserController::UserController(UserView* view, User* model) : view(view), model(model) {
@@ -26,6 +27,8 @@ UserController::UserController(UserView* view, User* model) : view(view), model(
     view->Bind(wxEVT_BUTTON, &UserController::saveBankAccount, this, ID_SAVE);
     //Bind dei pulsanti della GUI ReceivePanelView
     view->Bind(wxEVT_BUTTON, &UserController::generateCode, this, ID_GENERATE);
+    //Bind dei pulsanti della GUI SendPanelView
+    view->Bind(wxEVT_BUTTON, &UserController::sendMoney, this, ID_TRANSFER);
 }
 
 void UserController::init() {
@@ -109,6 +112,30 @@ void UserController::generateCode(wxCommandEvent &event) {
     } catch (const std::invalid_argument& e) {
         wxMessageBox(e.what(), "Errore", wxICON_ERROR);
     } catch (const std::out_of_range& e) {
+        wxMessageBox(e.what(), "Errore", wxICON_ERROR);
+    }
+}
+
+//SendPanelView
+
+void UserController::sendMoney(wxCommandEvent &event) {
+    auto * sendPanel = std::any_cast<SendPanelView*>(view->getCreatorObject());
+    std::string code = sendPanel->getAddress();
+    std::string amount = sendPanel->getAmount();
+    try {
+        if (model->getSendPanel()->sendMoney(model->getId(), amount, code)) {
+            wxMessageBox("Transazione completata con successo.", "Successo", wxICON_INFORMATION);
+            sendPanel->clearFields();
+        } else {
+            wxMessageBox("Errore durante la transazione.", "Errore", wxICON_ERROR);
+        }
+    } catch (const std::invalid_argument& e) {
+        wxMessageBox(e.what(), "Errore", wxICON_ERROR);
+    } catch (const std::out_of_range& e) {
+        wxMessageBox(e.what(), "Errore", wxICON_ERROR);
+    }catch (const std::runtime_error& e) {
+        wxMessageBox(e.what(), "Errore", wxICON_ERROR);
+    }catch (const std::exception& e) {
         wxMessageBox(e.what(), "Errore", wxICON_ERROR);
     }
 }

@@ -4,6 +4,10 @@
 
 #include "include/view/SendPanelView.h"
 
+enum MenuIDs {
+    ID_TRANSFER = 107
+};
+
 SendPanelView::SendPanelView(wxPanel* panel) {
 
     this->panel = panel;
@@ -31,6 +35,7 @@ SendPanelView::SendPanelView(wxPanel* panel) {
     //this->amount->SetBackgroundColour(wxColour(0, 255, 0));
 
     this->sendButton = new wxButton(this->panel, wxID_ANY, "Trasferisci", wxPoint(150, 280), wxSize(200, 30), wxALIGN_CENTER_HORIZONTAL);
+    this->sendButton->SetId(ID_TRANSFER);
 }
 
 SendPanelView::~SendPanelView() {
@@ -39,4 +44,17 @@ SendPanelView::~SendPanelView() {
 
 wxPanel *SendPanelView::getPanel() {
     return this->panel;
+}
+
+std::string SendPanelView::getAddress() {
+    return this->address->GetValue().ToStdString();
+}
+
+std::string SendPanelView::getAmount() {
+    return this->amount->GetValue().ToStdString();
+}
+
+void SendPanelView::clearFields() {
+    this->address->Clear();
+    this->amount->Clear();
 }

@@ -31,9 +31,16 @@ BankAccountPanelView::BankAccountPanelView(wxPanel *panel, const std::vector<std
     this->cvv = new wxTextCtrl(this->panel, wxID_ANY, parametri[2], wxPoint(250, 195), wxSize(230, 30), wxALIGN_CENTER_HORIZONTAL);
     this->cvv->SetFont(wxFont(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
 
+    //arrotondo il saldo a due decimali
+    std::string actualBalance = parametri[3];
+    if(actualBalance.find('.') != std::string::npos) {
+        actualBalance = actualBalance.substr(0, actualBalance.find('.') + 3);
+    }else{
+        actualBalance += ".00";
+    }
     auto * balanceLabel = new wxStaticText(this->panel, wxID_ANY, "Saldo (€):", wxPoint(0, 260), wxSize(250, 30), wxALIGN_CENTER_HORIZONTAL);
     balanceLabel->SetFont(wxFont(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
-    this->balance = new wxTextCtrl(this->panel, wxID_ANY, parametri[3], wxPoint(250, 255) , wxSize(230, 30), wxALIGN_CENTER_HORIZONTAL);
+    this->balance = new wxTextCtrl(this->panel, wxID_ANY, actualBalance, wxPoint(250, 255) , wxSize(230, 30), wxALIGN_CENTER_HORIZONTAL);
     this->balance->SetFont(wxFont(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
 
     this->saveButton = new wxButton(panel, wxID_ANY, "Salva Modifiche", wxPoint(150, 320), wxSize(200, 30));

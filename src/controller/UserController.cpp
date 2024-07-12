@@ -149,7 +149,6 @@ void UserController::sendMoney(wxCommandEvent &event) {
 
 //HomePanelView
 void UserController::exportTransactions(wxCommandEvent &event) {
-    auto * homePanel = std::any_cast<HomePanelView*>(view->getCreatorObject());
     std::vector<Transazione> transactions = model->getHomePanel()->getTransactions(model->getId());
     //crea il file txt con i movimenti (1 per riga)
     std::ofstream file("movimenti.txt");

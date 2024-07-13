@@ -11,7 +11,7 @@
 
 <p align='left'>
   Questo applicativo è stato realizzato utilizzando la libreria grafica <b>WxWidgets</b> e un database <b>MySql</b>.<br>
-  Le classi principali sono state testate utilizzando <b>GoogleTest</b>, per la cattura di eventuali memory leak è stato utilizzato lo strumento <b>CppCheck</b>.
+  Le classi principali sono state testate utilizzando <b>GoogleTest</b> mentre per la cattura di eventuali memory leak è stato utilizzato lo strumento <b>CppCheck</b>.
 </p>
 
 ## Funzionalità Principali

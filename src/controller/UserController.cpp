@@ -173,3 +173,9 @@ void UserController::exportTransactions(wxCommandEvent &event) {
     file.close();
     wxMessageBox("Movimenti esportati con successo.", "Successo", wxICON_INFORMATION);
 }
+
+//Test
+
+void UserController::switchPanelTest(wxCommandEvent& event) {
+    switchPanel(event);
+}

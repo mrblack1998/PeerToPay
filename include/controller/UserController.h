@@ -18,6 +18,7 @@ public:
     UserController(UserView* view, User* model);
     ~UserController();
     void init();
+    void switchPanelTest(wxCommandEvent& event);
 
 private:
     void switchPanel(wxCommandEvent& event);

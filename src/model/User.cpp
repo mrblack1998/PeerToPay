@@ -28,8 +28,8 @@ void User::init() {
     if (mysql_num_rows(res) == 1) {
         MYSQL_ROW row = mysql_fetch_row(res);
         this->id = std::stoi(row[0]);
-        this->name = row[1];
-        this->surname = row[2];
+        this->name = row[3];
+        this->surname = row[4];
     } else {
         throw std::runtime_error("Nessun utente trovato con queste credenziali");
     }

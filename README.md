@@ -10,7 +10,8 @@
 ## Strumenti Utilizzati
 
 <p align='left'>
-  Questo applicativo è stato realizzato utilizzando la libreria grafica <b>WxWidgets</b> e un database <b>MySql</b>.
+  Questo applicativo è stato realizzato utilizzando la libreria grafica <b>WxWidgets</b> e un database <b>MySql</b>.<br>
+  Le classi principali sono state testate utilizzando <b>GoogleTest</b>, per la cattura di eventuali memory leak è stato utilizzato lo strumento <b>CppCheck</b>.
 </p>
 
 ## Funzionalità Principali
@@ -24,13 +25,13 @@
 ### Accesso:
 
 <p align='left'>
-  Oltre a consentire la verifica delle credenziali permette di salvare le credenziali in locale (se la verifica ha avuto esito positivo).
+  Oltre a consentire la verifica delle credenziali permette di salvare le credenziali in locale nel file <b>credenziali.txt</b> (se la verifica ha avuto esito positivo), i campi email e password verranno compilati automaticamente alla successiva esecuzione del programma.
 </p>
 
 ### Home:
 
 <p align='left'>
-  Consente la visualizzazione del saldo attuale sul conto associato (se presente), permette di visualizzare/esportare i movimenti relativi all'utente.
+  Consente la visualizzazione del saldo attuale sul conto associato (se presente), permette di visualizzare/esportare i movimenti relativi all'utente, l'esportazione produrrà un file di testo con una transazione per riga.
 </p>
 
 ### Invia:
@@ -42,7 +43,7 @@
 ### Ricevi:
 
 <p align='left'>
-  Verrà generato automaticamente un codice numerico di 5 cifre (univoco) per identificare quell'utente all'interno della piattaforma, il codice avrà una durata di 15 minuti, è possibile generne di nuovi.
+  Verrà generato automaticamente un codice numerico di 5 cifre (univoco) per identificare quell'utente all'interno della piattaforma, il codice avrà una durata di 15 minuti, è possibile generarne di nuovi.
 </p>
 
 ### Conto:
@@ -54,5 +55,5 @@
 ### Logout:
 
 <p align='left'>
-  L'utente verrà disconnesso e riportato alla pagina di acesso.
+  L'utente verrà disconnesso e riportato alla pagina di accesso.
 </p>

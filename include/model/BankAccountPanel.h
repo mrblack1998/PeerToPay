@@ -7,11 +7,12 @@
 
 #include "vector"
 #include "string"
-#include "DatabaseManager.h"
 #include "sstream"
 #include "iomanip"
+#include "DatabaseManager.h"
+#include "Utilities.h"
 
-class BankAccountPanel {
+class BankAccountPanel: public Utilities {
 public:
     BankAccountPanel();
     ~BankAccountPanel();

@@ -5,12 +5,13 @@
 #ifndef PEERTOPAY_SENDPANEL_H
 #define PEERTOPAY_SENDPANEL_H
 
-#include "DatabaseManager.h"
 #include "string"
 #include "sstream"
 #include "iomanip"
+#include "DatabaseManager.h"
+#include "Utilities.h"
 
-class SendPanel {
+class SendPanel: public Utilities{
 public:
     SendPanel();
     ~SendPanel();

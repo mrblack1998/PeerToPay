@@ -8,27 +8,9 @@ SendPanel::SendPanel() = default;
 
 SendPanel::~SendPanel() = default;
 
-std::string checkBalance(const std::string& balance) {
-    std::string balanceFormatted = balance;
-    std::replace(balanceFormatted.begin(), balanceFormatted.end(), ',', '.');
-
-    double number;
-    try {
-        number = std::stod(balanceFormatted);
-    } catch (const std::invalid_argument& e) {
-        throw std::invalid_argument("L'importo non è un numero valido.");
-    } catch (const std::out_of_range& e) {
-        throw std::out_of_range("L'importo è fuori dall'intervallo consentito.");
-    }
-
-    std::ostringstream stream;
-    stream << std::fixed << std::setprecision(2) << number;
-    return stream.str();
-}
-
 bool SendPanel::sendMoney(const int &id, const std::string &amount, const std::string &code) {
     //Verifica che l'ammontare da inviare sia un numero positivo e che l'utente abbia abbastanza denaro sul conto
-    std::string balance = checkBalance(amount);
+    std::string balance = Utilities::checkBalance(amount);
 
     if (balance.empty() || std::stod(balance) <= 0){
         throw std::runtime_error("L'importo deve essere un numero positivo");

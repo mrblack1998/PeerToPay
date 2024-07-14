@@ -13,7 +13,7 @@ class Register {
 public:
     Register();
     ~Register();
-    bool TryRegister(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password);
+    static bool TryRegister(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password);
 
 
 };

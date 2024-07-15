@@ -16,7 +16,6 @@ class LoginView: public wxFrame{
         wxButton* getRegisterButton();
 
     private:
-        void OnLogin(wxCommandEvent& event);
 
         wxTextCtrl* emailField;
         wxTextCtrl* passwordField;

@@ -87,7 +87,3 @@ wxButton* LoginView::getLoginButton() {
 wxButton* LoginView::getRegisterButton() {
     return registerButton;
 }
-
-void LoginView::OnLogin(wxCommandEvent &event) {
-
-}

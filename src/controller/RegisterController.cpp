@@ -42,3 +42,5 @@ void RegisterController::onRegister(wxCommandEvent &event) {
         wxMessageBox(e.what(), "Errore", wxICON_ERROR);
     }
 }
+
+RegisterController::~RegisterController() = default;

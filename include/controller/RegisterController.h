@@ -12,6 +12,7 @@
 class RegisterController {
 public:
     RegisterController(RegisterView* view, Register* model);
+    ~RegisterController();
     void init();
     void switchToLogin(wxCommandEvent& event);
     void onRegister(wxCommandEvent& event);

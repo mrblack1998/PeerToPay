@@ -18,32 +18,13 @@ protected:
 };
 
 TEST_F(SendPanelTest, SendAmountGreaterThan1000) {
-    bool result = true;
-    try{
-        result = sendPanel->sendMoney(1, "999999", "55555");
-    }catch (std::exception& e){
-        result = false;
-    }
-    ASSERT_FALSE(result);
+    ASSERT_THROW(sendPanel->sendMoney(1, "999999", "55555"), std::exception);
 }
 
 TEST_F(SendPanelTest, SendNonNumericAmount) {
-    bool result = true;
-    try{
-        result = sendPanel->sendMoney(1, "Amount", "55555");
-    }catch (std::exception& e){
-        result = false;
-    }
-    ASSERT_FALSE(result);
+    ASSERT_THROW(sendPanel->sendMoney(1, "Amount", "55555"), std::exception);
 }
 
 TEST_F(SendPanelTest, SendToInvalideCode) {
-    bool result = true;
-    try{
-        result = sendPanel->sendMoney(1, "100", "qwert");
-    }catch (std::exception& e){
-        result = false;
-    }
-    ASSERT_FALSE(result);
-
+    ASSERT_THROW(sendPanel->sendMoney(1, "100", "qwert"), std::exception);
 }

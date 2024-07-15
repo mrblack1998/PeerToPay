@@ -51,3 +51,5 @@ void LoginController::OnClose(wxCloseEvent &event) {
     this->view->Destroy();
     exit(0);
 }
+
+LoginController::~LoginController() = default;
